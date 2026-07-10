@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowserAide</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-row">
+        <img class="brand-logo" src="icons/icon48.png" alt="BrowserAide">
+        <span class="brand-name">BrowserAide</span>
+      </div>
+      <div class="topbar-actions">
+        <span id="status-badge" class="badge badge-ready">Ready</span>
+        <button id="settings-btn" class="settings-button" type="button" title="Open settings" aria-label="Open settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.85l.05.05a2 2 0 0 1-2.83 2.83l-.05-.05a1.7 1.7 0 0 0-1.85-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 0 1-4 0v-.08a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.85.34l-.05.05a2 2 0 1 1-2.83-2.83l.05-.05A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 0 1 0-4h.08A1.7 1.7 0 0 0 4.64 8.9a1.7 1.7 0 0 0-.34-1.85l-.05-.05a2 2 0 1 1 2.83-2.83l.05.05A1.7 1.7 0 0 0 8.98 4.6h.08A1.7 1.7 0 0 0 10.6 3.04V3a2 2 0 0 1 4 0v.08a1.7 1.7 0 0 0 1.03 1.56 1.7 1.7 0 0 0 1.85-.34l.05-.05a2 2 0 1 1 2.83 2.83l-.05.05A1.7 1.7 0 0 0 19.4 8.98v.08A1.7 1.7 0 0 0 20.96 10.6H21a2 2 0 0 1 0 4h-.08A1.7 1.7 0 0 0 19.4 15z"></path></svg></button>
+      </div>
+    </header>
+
+    <section class="section mode-section" aria-labelledby="mode-title">
+      <div class="section-header section-header-compact">
+        <span class="section-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 4H10a2 2 0 0 0-2 2v0"/>
+            <path d="M21 4v16H10a2 2 0 0 0-2 2v0"/>
+            <path d="M3 8h8M3 12h8M3 16h8"/>
+          </svg>
+        </span>
+        <h2 id="mode-title" class="section-title">Mode</h2>
+        <span id="mode-note" class="section-hint">Choose how BrowserAide controls the page</span>
+      </div>
+      <div class="mode-switcher">
+        <div class="mode-track" role="group" aria-label="Control mode" data-active="hybrid">
+          <div class="mode-indicator" aria-hidden="true"></div>
+          <button class="mode-btn" type="button" data-mode="dom" data-tooltip="Best for structured pages.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>
+            </svg>
+            <span>DOM</span>
+          </button>
+          <button class="mode-btn" type="button" data-mode="visual" data-tooltip="Best for visual interfaces.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <span>Visual</span>
+          </button>
+          <button class="mode-btn mode-active" type="button" data-mode="hybrid" data-tooltip="Recommended for most tasks.">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+            </svg>
+            <span>Hybrid</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section task-section" aria-labelledby="task-title">
+      <div class="section-header section-header-compact">
+        <span class="section-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9"/>
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+          </svg>
+        </span>
+        <h2 id="task-title" class="section-title">Task</h2>
+        <span class="section-hint">Enter to run, Shift+Enter for newline</span>
+      </div>
+      <div class="input-section">
+        <div class="input-wrapper">
+          <textarea id="instruction" rows="3" placeholder="Tell BrowserAide what to do on this page..."></textarea>
+        </div>
+        <div class="suggestions" aria-label="Example tasks">
+          <button class="suggestion-chip" type="button" data-example="Read this page and summarize the most important information for me">Summarize this page</button>
+          <button class="suggestion-chip" type="button" data-example="Compare the plans or options on this page and tell me the main differences">Compare plans</button>
+          <button class="suggestion-chip" type="button" data-example="Fill out the form on this page using the information I provide">Fill out a form</button>
+        </div>
+      </div>
+      <p id="input-error" class="input-error hidden">Please enter a task instruction.</p>
+    </section>
+
+    <div class="post-task-stack">
+      <section class="section action-section" aria-label="Task actions">
+        <button id="start-btn" class="btn btn-primary" type="button">
+          <span class="btn-icon">▶</span>
+          <span>Start Task</span>
+        </button>
+        <button id="resume-btn" class="btn btn-primary hidden" type="button">
+          <span class="btn-icon">▶</span>
+          <span>Resume</span>
+        </button>
+        <button id="reset-btn" class="btn btn-quiet" type="button">Reset session</button>
+      </section>
+
+      <section id="run-section" class="section run-section" aria-labelledby="run-title">
+        <div class="section-header section-header-compact">
+          <span class="section-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 12h4l2-6 4 12 2-6h4"/>
+            </svg>
+          </span>
+          <h2 id="run-title" class="section-title">Execution</h2>
+          <span id="current-step" class="section-hint">Step 0</span>
+        </div>
+
+        <div class="run-panel">
+          <div id="pause-alert" class="attention-row hidden">
+            <span class="attention-dot">!</span>
+            <div>
+              <strong>Needs attention</strong>
+              <p id="pause-reason">Please complete the required action.</p>
+            </div>
+          </div>
+
+          <div id="progress-section" class="run-status">
+            <div class="status-line">
+              <span id="run-dot" class="status-dot status-idle"></span>
+              <span id="progress-status">Waiting for a task</span>
+            </div>
+            <div class="progress-bar" aria-hidden="true">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <div id="thought-section" class="run-block hidden">
+            <div class="run-label">Thinking <span id="streaming-indicator" class="streaming-indicator hidden">...</span></div>
+            <div id="thought-content" class="run-text"></div>
+          </div>
+
+          <div id="action-output-section" class="run-block hidden">
+            <div class="run-label">Action</div>
+            <div id="action-content" class="run-code"></div>
+          </div>
+
+          <div id="answer-section" class="result-block hidden">
+            <div class="run-label">Result</div>
+            <div id="answer-content" class="answer-content"></div>
+          </div>
+
+          <details id="details-panel" class="details-panel">
+            <summary>
+              <span>Details</span>
+              <button id="clear-logs-btn" class="text-button" type="button">Clear logs</button>
+            </summary>
+            <div id="logs-container" class="logs-container">
+              <div class="log-placeholder"><span class="terminal-prompt">$</span> Waiting for commands...</div>
+            </div>
+          </details>
+        </div>
+      </section>
+    </div>
+
+    <footer class="popup-footer" aria-label="Resources">
+      <button id="quick-start-link" class="footer-link" type="button">Quick Start Guide</button>
+      <span class="footer-divider" aria-hidden="true">·</span>
+      <button id="github-link" class="footer-link" type="button">GitHub Repository</button>
+    </footer>
+
+    <aside id="settings-drawer" class="settings-drawer hidden" aria-hidden="true">
+      <div class="settings-backdrop" data-close-drawer="true"></div>
+      <div class="settings-panel" role="dialog" aria-modal="false" aria-labelledby="settings-title">
+        <div class="settings-panel-topbar">
+          <div>
+            <h2 id="settings-title" class="settings-title-main">Settings</h2>
+          </div>
+          <button id="settings-close" class="settings-close" type="button" aria-label="Close settings">×</button>
+        </div>
+
+        <div class="settings-tabs" role="tablist" aria-label="Settings sections">
+          <button id="settings-tab-general" class="settings-tab is-active" type="button" role="tab" aria-selected="true" data-tab="general">General</button>
+          <button id="settings-tab-model" class="settings-tab" type="button" role="tab" aria-selected="false" data-tab="model">Model</button>
+          <button id="settings-tab-help" class="settings-tab" type="button" role="tab" aria-selected="false" data-tab="help">Help</button>
+        </div>
+
+        <div id="settings-pane-general" class="settings-pane" role="tabpanel" aria-labelledby="settings-tab-general">
+          <section class="settings-group">
+            <div class="settings-group-heading">
+              <h3>General</h3>
+              <p>Tune how BrowserAide runs each task.</p>
+            </div>
+
+            <label class="settings-input-row">
+              <span>Max steps</span>
+              <small>Set the run limit for each task.</small>
+              <input id="settings-max-steps" class="settings-input" type="number" min="1" step="1" placeholder="20">
+            </label>
+
+            <label class="settings-input-row">
+              <span>Retry limit</span>
+              <small>Allowed consecutive failures before stop.</small>
+              <input id="settings-retry-limit" class="settings-input" type="number" min="0" step="1" placeholder="3">
+            </label>
+
+            <label class="settings-input-row">
+              <span>Page wait time</span>
+              <small>How long BrowserAide waits for a page to load.</small>
+              <input id="settings-page-wait-time" class="settings-input" type="number" min="0" step="100" placeholder="8000">
+            </label>
+
+          </section>
+        </div>
+
+        <div id="settings-pane-model" class="settings-pane hidden" role="tabpanel" aria-labelledby="settings-tab-model">
+          <section class="settings-group">
+            <div class="settings-group-heading">
+              <h3>Model</h3>
+              <p>Set the model endpoint and credentials.</p>
+            </div>
+
+            <label class="settings-input-row">
+              <span>API key</span>
+              <small>Used for authenticated requests.</small>
+              <input id="settings-api-key" class="settings-input" type="password" placeholder="sk-...">
+            </label>
+
+            <label class="settings-input-row">
+              <span>Base URL</span>
+              <small>Use a custom endpoint if needed.</small>
+              <input id="settings-base-url" class="settings-input" type="url" placeholder="http://localhost:8000">
+            </label>
+
+            <label class="settings-input-row">
+              <span>Model name</span>
+              <small>Enter the exact model identifier.</small>
+              <input id="settings-model-name" class="settings-input" type="text" placeholder="gpt-4.1-mini">
+            </label>
+
+            <div class="settings-note">
+              Saved locally in this browser profile.
+            </div>
+          </section>
+
+          <section class="settings-group">
+            <div class="settings-group-heading">
+              <h3>Endpoint test</h3>
+              <p>Check whether BrowserAide can reach the configured VLM endpoint.</p>
+            </div>
+
+            <div class="settings-test-card">
+              <div class="settings-test-copy">
+                <strong>VLM connection</strong>
+                <span id="settings-vlm-test-status">Not tested yet.</span>
+              </div>
+              <button id="settings-test-vlm" class="settings-test-button" type="button">Test</button>
+            </div>
+          </section>
+        </div>
+
+        <div id="settings-pane-help" class="settings-pane settings-pane-help hidden" role="tabpanel" aria-labelledby="settings-tab-help">
+          <section class="settings-group">
+            <div class="settings-group-heading">
+              <h3>Help</h3>
+              <p>A quick guide to how BrowserAide works.</p>
+            </div>
+
+            <button id="open-full-guide" class="help-link-button" type="button">
+              <span>Open full guide</span>
+              <span class="help-link-arrow" aria-hidden="true">›</span>
+            </button>
+          </section>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "BrowserAide",
+  "version": "2.0.0",
+  "description": "Three-mode web automation agent (DOM/Visual/Hybrid) powered by VLM.",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "BrowserAide",
+    "default_icon": {
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs",
+    "activeTab",
+    "sidePanel"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

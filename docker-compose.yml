@@ -1,0 +1,26 @@
+services:
+  server:
+    build:
+      context: ./server
+      args:
+        PYTHON_IMAGE: ${PYTHON_IMAGE:-docker.m.daocloud.io/library/python:3.11-slim}
+    image: browseraide-server:latest
+    container_name: browseraide-server
+    ports:
+      - "${SERVER_PORT:-8004}:8004"
+    environment:
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: 8004
+      VLM_API_KEY: ${VLM_API_KEY:-}
+      VLM_BASE_URL: ${VLM_BASE_URL:-}
+      VLM_MODEL_NAME: ${VLM_MODEL_NAME:-}
+      BROWSER_CONTROL_MODE: ${BROWSER_CONTROL_MODE:-hybrid}
+      MAX_IMAGE_HISTORY: ${MAX_IMAGE_HISTORY:-3}
+      DEBUG_SAVE_INPUTS: ${DEBUG_SAVE_INPUTS:-false}
+      VLM_MAX_TOKENS: ${VLM_MAX_TOKENS:-8000}
+      VLM_DEFAULT_STEP_MAX_TOKENS: ${VLM_DEFAULT_STEP_MAX_TOKENS:-3000}
+      VLM_SUMMARY_STEP_MAX_TOKENS: ${VLM_SUMMARY_STEP_MAX_TOKENS:-8000}
+    volumes:
+      - ./server:/app
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8004", "--reload"]
+    restart: unless-stopped

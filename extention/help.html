@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrowserAide Guide</title>
+  <link rel="stylesheet" href="help.css">
+  <script src="help.js" defer></script>
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <div class="topbar">
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button id="lang-en" class="lang-btn is-active" type="button">EN</button>
+          <button id="lang-zh" class="lang-btn" type="button">中文</button>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <p class="hero-kicker" data-i18n="text" data-en="Browser automation, refined." data-zh="浏览器自动化，轻巧好用。">Browser automation, refined.</p>
+        <h1 data-i18n="html" data-en="Turn complex web tasks,<br>into something simple." data-zh="把复杂网页任务，<br>变成一件简单的事。">Turn complex web tasks,<br>into something simple.</h1>
+        <p class="hero-description" data-i18n="text" data-en="Describe the goal. BrowserAide understands the page, plans the steps, and gets to work. You step in only when it matters." data-zh="描述目标，BrowserAide 会理解页面、安排步骤并开始执行。你在必要的时候介入，其余时间交给它完成。">Describe the goal. BrowserAide understands the page, plans the steps, and gets to work. You step in only when it matters.</p>
+        <div class="hero-actions">
+          <a class="hero-link" href="#quickstart" data-i18n="text" data-en="Get started" data-zh="开始了解">Get started</a>
+          <a class="hero-link hero-link-secondary" href="#how-to-use" data-i18n="text" data-en="How to use" data-zh="如何使用">How to use</a>
+        </div>
+      </div>
+      <div class="hero-meta" aria-label="Overview">
+        <span data-i18n="text" data-en="Start with Hybrid by default" data-zh="默认从 Hybrid 开始">Start with Hybrid by default</span>
+        <span data-i18n="text" data-en="Use DOM when the structure is clear" data-zh="结构清晰时切换 DOM">Use DOM when the structure is clear</span>
+        <span data-i18n="text" data-en="Use Visual for complex interfaces" data-zh="视觉复杂时使用 Visual">Use Visual for complex interfaces</span>
+        <span data-i18n="text" data-en="You confirm the critical moments" data-zh="关键节点由你确认">You confirm the critical moments</span>
+      </div>
+    </header>
+
+    <section id="quickstart" class="section-block">
+      <div class="section-heading">
+        <div class="section-title-with-icon">
+          <img src="icons/icon128.png" alt="" aria-hidden="true">
+          <h2 data-i18n="text" data-en="BrowserAide" data-zh="BrowserAide">BrowserAide</h2>
+        </div>
+      </div>
+      <p class="overview-copy" data-i18n="html" data-en="BrowserAide is a <span class='overview-key'>multimodal Chrome agent</span> that turns <span class='overview-key'>natural-language instructions</span> into real browser actions. It observes both the DOM structure and the page screenshot, plans each step with a vision-language model, and uses <span class='overview-key'>Hybrid control</span> to combine structured element actions with visual actions. For login, CAPTCHA, payment, or sensitive confirmation, BrowserAide pauses and lets you resume after handling the step manually." data-zh="BrowserAide 是一个<span class='overview-key'>多模态 Chrome 智能体</span>，可以把<span class='overview-key'>自然语言指令</span>转化为真实浏览器操作。它会同时观察页面的 DOM 结构和截图，借助视觉语言模型规划每一步，并通过 <span class='overview-key'>Hybrid control</span> 结合结构化元素动作和视觉动作。遇到登录、验证码、支付或敏感确认时，BrowserAide 会暂停，并在你手动处理后继续执行。">BrowserAide is a <span class='overview-key'>multimodal Chrome agent</span> that turns <span class='overview-key'>natural-language instructions</span> into real browser actions. It observes both the DOM structure and the page screenshot, plans each step with a vision-language model, and uses <span class='overview-key'>Hybrid control</span> to combine structured element actions with visual actions. For login, CAPTCHA, payment, or sensitive confirmation, BrowserAide pauses and lets you resume after handling the step manually.</p>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <h2 data-i18n="text" data-en="Three modes" data-zh="三种模式">Three modes</h2>
+        <p data-i18n="text" data-en="Each mode fits a different kind of page, not a different level of complexity." data-zh="每一种模式都服务于不同的页面结构，而不是为了显得更复杂。">Each mode fits a different kind of page, not a different level of complexity.</p>
+      </div>
+      <div class="mode-list">
+        <article class="mode-item">
+          <div class="mode-title-row">
+            <h3>DOM</h3>
+            <span class="mode-label" data-i18n="text" data-en="Faster" data-zh="更快">Faster</span>
+          </div>
+          <p data-i18n="text" data-en="For pages with clear structure and consistent rules." data-zh="适合结构清晰、规则明确的页面。">For pages with clear structure and consistent rules.</p>
+          <dl>
+            <div>
+              <dt data-i18n="text" data-en="Best for" data-zh="适合">Best for</dt>
+              <dd data-i18n="text" data-en="Stable elements, easy targeting." data-zh="元素稳定，容易命中。">Stable elements, easy targeting.</dd>
+            </div>
+            <div>
+              <dt data-i18n="text" data-en="Trait" data-zh="特点">Trait</dt>
+              <dd data-i18n="text" data-en="Direct path, faster feedback." data-zh="路径直接，反馈更快。">Direct path, faster feedback.</dd>
+            </div>
+          </dl>
+        </article>
+        <article class="mode-item">
+          <div class="mode-title-row">
+            <h3>Visual</h3>
+            <span class="mode-label" data-i18n="text" data-en="More flexible" data-zh="更灵活">More flexible</span>
+          </div>
+          <p data-i18n="text" data-en="For interfaces driven by layout, rendering, and visuals." data-zh="适合依赖视觉布局的复杂界面。">For interfaces driven by layout, rendering, and visuals.</p>
+          <dl>
+            <div>
+              <dt data-i18n="text" data-en="Best for" data-zh="适合">Best for</dt>
+              <dd data-i18n="text" data-en="Complex layouts, frequent change." data-zh="布局复杂，变化频繁。">Complex layouts, frequent change.</dd>
+            </div>
+            <div>
+              <dt data-i18n="text" data-en="Trait" data-zh="特点">Trait</dt>
+              <dd data-i18n="text" data-en="Broader reach, screen-dependent." data-zh="覆盖更广，依赖画面。">Broader reach, screen-dependent.</dd>
+            </div>
+          </dl>
+        </article>
+        <article class="mode-item mode-item-emphasis">
+          <div class="mode-title-row">
+            <h3>Hybrid</h3>
+            <span class="mode-label mode-label-strong" data-i18n="text" data-en="Default" data-zh="默认推荐">Default</span>
+          </div>
+          <p data-i18n="text" data-en="Balances stability and adaptability for most tasks." data-zh="兼顾稳定与适应性，适合大多数任务。">Balances stability and adaptability for most tasks.</p>
+          <dl>
+            <div>
+              <dt data-i18n="text" data-en="Best for" data-zh="适合">Best for</dt>
+              <dd data-i18n="text" data-en="Changing pages, less manual choice." data-zh="页面多变，省去判断。">Changing pages, less manual choice.</dd>
+            </div>
+            <div>
+              <dt data-i18n="text" data-en="Trait" data-zh="特点">Trait</dt>
+              <dd data-i18n="text" data-en="Steadier, better for multi-step work." data-zh="更稳，更适合多步任务。">Steadier, better for multi-step work.</dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <section id="how-to-use" class="section-block">
+      <div class="section-heading">
+        <h2 data-i18n="text" data-en="How to use" data-zh="如何使用">How to use</h2>
+        <p data-i18n="text" data-en="BrowserAide runs from the Chrome side panel and talks to your configured VLM backend." data-zh="BrowserAide 在 Chrome 侧边栏中运行，并连接你配置好的 VLM 后端。">BrowserAide runs from the Chrome side panel and talks to your configured VLM backend.</p>
+      </div>
+      <div class="action-lines">
+        <div><strong>1. Start backend</strong><span data-i18n="text" data-en="Run the FastAPI server locally or with Docker before starting a task." data-zh="开始任务前，先通过本地命令或 Docker 启动 FastAPI 后端。">Run the FastAPI server locally or with Docker before starting a task.</span></div>
+        <div><strong>2. Set model</strong><span data-i18n="text" data-en="Open Settings > Model, then enter the API key, base URL, and model name." data-zh="打开 Settings > Model，填写 API key、base URL 和 model name。">Open Settings &gt; Model, then enter the API key, base URL, and model name.</span></div>
+        <div><strong>3. Choose mode</strong><span data-i18n="text" data-en="Use Hybrid for most tasks; switch to DOM for structured pages or Visual for custom interfaces." data-zh="大多数任务使用 Hybrid；结构清晰时用 DOM，自定义界面较多时用 Visual。">Use Hybrid for most tasks; switch to DOM for structured pages or Visual for custom interfaces.</span></div>
+        <div><strong>4. Describe task</strong><span data-i18n="text" data-en="Write the goal, constraints, and desired output in the task box." data-zh="在任务框中写清目标、约束条件和期望输出。">Write the goal, constraints, and desired output in the task box.</span></div>
+        <div><strong>5. Start run</strong><span data-i18n="text" data-en="Click Start Task. BrowserAide observes the page, plans each step, and executes in Chrome." data-zh="点击 Start Task。BrowserAide 会观察页面、规划步骤，并在 Chrome 中执行。">Click Start Task. BrowserAide observes the page, plans each step, and executes in Chrome.</span></div>
+        <div><strong>6. Monitor progress</strong><span data-i18n="text" data-en="Watch Execution, Thinking, Action, Result, and Details to understand what is happening." data-zh="查看 Execution、Thinking、Action、Result 和 Details，了解当前进展。">Watch Execution, Thinking, Action, Result, and Details to understand what is happening.</span></div>
+        <div><strong>7. Resume if needed</strong><span data-i18n="text" data-en="When login, CAPTCHA, or confirmation is required, complete it manually and click Resume." data-zh="遇到登录、验证码或确认操作时，手动完成后点击 Resume。">When login, CAPTCHA, or confirmation is required, complete it manually and click Resume.</span></div>
+        <div><strong>8. Reset session</strong><span data-i18n="text" data-en="Use Reset session when you want a fresh task state or the page context changed too much." data-zh="需要重新开始，或页面上下文变化较大时，使用 Reset session。">Use Reset session when you want a fresh task state or the page context changed too much.</span></div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-heading">
+        <h2 data-i18n="text" data-en="What you confirm" data-zh="你来确认的部分">What you confirm</h2>
+        <p data-i18n="text" data-en="Automation does not replace judgment. High-risk moments still belong to you." data-zh="自动化并不替代判断。关键风险节点，仍然由你决定。">Automation does not replace judgment. High-risk moments still belong to you.</p>
+      </div>
+      <div class="guardrail-list">
+        <div>
+          <h3 data-i18n="text" data-en="Login and verification" data-zh="登录与验证">Login and verification</h3>
+          <p data-i18n="text" data-en="Passwords, captchas, and 2FA usually need your input." data-zh="账号密码、验证码、双重验证通常需要你手动完成。">Passwords, captchas, and 2FA usually need your input.</p>
+        </div>
+        <div>
+          <h3 data-i18n="text" data-en="Payment and submission" data-zh="支付与提交">Payment and submission</h3>
+          <p data-i18n="text" data-en="Payment, deletion, approval, and checkout pause for confirmation." data-zh="支付、删除、审批、下单等动作会暂停等待确认。">Payment, deletion, approval, and checkout pause for confirmation.</p>
+        </div>
+        <div>
+          <h3 data-i18n="text" data-en="Exception handling" data-zh="异常处理">Exception handling</h3>
+          <p data-i18n="text" data-en="If the page shows a popup or odd permission state, you can fix it and continue." data-zh="如果页面弹窗或权限状态异常，你可以修正后继续执行。">If the page shows a popup or odd permission state, you can fix it and continue.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block section-block-last">
+      <div class="section-heading">
+        <h2 data-i18n="text" data-en="Learn More" data-zh="了解更多">Learn More</h2>
+        <p data-i18n="text" data-en="Explore the BrowserAide repository for source code, setup notes, and protocol details." data-zh="在 BrowserAide 仓库中查看源代码、配置说明和协议文档。">Explore the BrowserAide repository for source code, setup notes, and protocol details.</p>
+      </div>
+      <a class="repo-link" href="https://github.com/lnennnn/BrowserAide" target="_blank" rel="noreferrer noopener">
+        <span data-i18n="text" data-en="Open BrowserAide on GitHub" data-zh="在 GitHub 打开 BrowserAide">Open BrowserAide on GitHub</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+
+    <footer class="footer-panel">
+      <div>
+        <p data-i18n="text" data-en="It stays out of the way, but keeps the important decisions with you." data-zh="尽量少打扰你，但把关键决定权留给你。">It stays out of the way, but keeps the important decisions with you.</p>
+      </div>
+      <button id="close-btn" class="footer-button" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m12 19-7-7 7-7M19 12H5"></path>
+        </svg>
+        <span data-i18n="text" data-en="Back to extension" data-zh="返回扩展">Back to extension</span>
+      </button>
+    </footer>
+  </main>
+</body>
+</html>

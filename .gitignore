@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environments and secrets
+.env
+.venv/
+venv/
+env/
+
+# Logs and debug outputs
+debug_logs/
+server/debug_logs/
+*.log
+
+# OS/editor files
+.DS_Store
+.vscode/
+.idea/
+*.swp
