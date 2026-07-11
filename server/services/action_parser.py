@@ -245,14 +245,26 @@ class ActionParser:
         vh: int,
     ) -> Optional[Tuple[float, float]]:
         """Convert normalized coordinates into viewport pixels."""
-        nums = [float(n) for n in re.findall(r"(\d+)", coord_str)]
-        if len(nums) < 2:
+        raw = coord_str.strip()
+        bracket_pairs = {"(": ")", "[": "]"}
+        if raw[:1] in bracket_pairs:
+            if not raw.endswith(bracket_pairs[raw[0]]):
+                return None
+            raw = raw[1:-1].strip()
+        elif raw[-1:] in bracket_pairs.values():
+            return None
+
+        if not re.fullmatch(r"\d+\s*,\s*\d+(?:\s*,\s*\d+\s*,\s*\d+)?", raw):
+            return None
+
+        nums = [int(value.strip()) for value in raw.split(",")]
+        if any(value < 0 or value > self.scale for value in nums):
             return None
 
         rel = [n / self.scale for n in nums]
         if len(rel) == 2:
             return (rel[0] * vw, rel[1] * vh)
-        if len(rel) >= 4:
+        if len(rel) == 4:
             cx = (rel[0] + rel[2]) / 2
             cy = (rel[1] + rel[3]) / 2
             return (cx * vw, cy * vh)

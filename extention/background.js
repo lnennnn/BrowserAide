@@ -117,6 +117,7 @@ function resetState(newSession = true) {
     finalAnswer: "",
     controlMode: savedMode,
     taskSettings: { ...DEFAULT_TASK_SETTINGS },
+    lastActionResult: null,
     logs: []
   };
 }
@@ -295,6 +296,7 @@ async function handleStartTask(instruction, settings = {}) {
   agentState.instruction = instruction;
   agentState.isRunning = false;
   agentState.isPaused = false;
+  agentState.pauseReason = "";
   agentState.tabId = tab.id;
   agentState.windowId = tab.windowId;
   agentState.sessionId = newSessionId;
@@ -304,6 +306,7 @@ async function handleStartTask(instruction, settings = {}) {
   agentState.finalAnswer = "";
   agentState.logs = [];
   agentState.taskSettings = normalizeTaskSettings(settings);
+  agentState.lastActionResult = null;
 
   updateStatus("Checking backend...");
   addLog("info", `Checking backend at ${Config.SERVER_URL}...`);

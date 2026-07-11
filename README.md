@@ -79,7 +79,7 @@ Chrome extension StepRequest
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/lnennnn/WebWeaver.git BrowserAide
+git clone https://github.com/lnennnn/BrowserAide.git
 cd BrowserAide
 ```
 

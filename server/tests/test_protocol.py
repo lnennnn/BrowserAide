@@ -120,6 +120,20 @@ class ProtocolTest(unittest.TestCase):
         self.assertEqual(parsed["schema_version"], "invalid_model_output")
         self.assertIn("markdown fenced output", parsed["status"]["error"])
 
+    def test_action_parser_rejects_invalid_visual_coordinates(self):
+        parser = ActionParser()
+
+        for coordinates in ("(500.5,250.5)", "(-20,100)", "(1001,100)", "(500,250]"):
+            with self.subTest(coordinates=coordinates):
+                parsed = parser.parse(json.dumps({
+                    "schema_version": MODEL_OUTPUT_SCHEMA_VERSION,
+                    "thought": {"stream": "click", "summary": "click"},
+                    "status": {"state": "running"},
+                    "actions": [{"action_type": "click", "action_inputs": {"start_box": coordinates}}],
+                }), 1000, 800)
+                self.assertEqual(parsed["schema_version"], "invalid_model_output")
+                self.assertIn("valid coordinates", parsed["status"]["error"])
+
     def test_stream_extractors_tolerate_partial_json(self):
         self.assertEqual(extract_partial_thought_stream('{"thought":{"stream":"hello'), "hello")
         self.assertEqual(extract_partial_thought_stream('{"thought":{"stream":"hello\\nworld"'), "hello\nworld")

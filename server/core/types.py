@@ -68,7 +68,6 @@ class StepRequest(BaseModel):
     title: Optional[str] = None
     last_action_result: Optional[Dict[str, Any]] = None
     max_consecutive_failures: Optional[int] = None
-    language: Optional[str] = None
     api_key: Optional[str] = None
     base_url: Optional[str] = None
     model_name: Optional[str] = None

@@ -322,9 +322,9 @@ async function collectCurrentSettings() {
   settings.maxSteps = settingsMaxSteps?.value.trim() || settings.maxSteps;
   settings.retryLimit = settingsRetryLimit?.value.trim() || settings.retryLimit;
   settings.pageWaitTime = settingsPageWaitTime?.value.trim() || settings.pageWaitTime;
-  settings.apiKey = settingsApiKey?.value.trim() || settings.apiKey;
-  settings.baseUrl = settingsBaseUrl?.value.trim() || settings.baseUrl;
-  settings.modelName = settingsModelName?.value.trim() || settings.modelName;
+  settings.apiKey = settingsApiKey ? settingsApiKey.value.trim() : settings.apiKey;
+  settings.baseUrl = settingsBaseUrl ? settingsBaseUrl.value.trim() : settings.baseUrl;
+  settings.modelName = settingsModelName ? settingsModelName.value.trim() : settings.modelName;
   return settings;
 }
 
@@ -429,11 +429,15 @@ function updatePauseState(state) {
 
 function updateRunPanel(state) {
   const step = state.step || 0;
+  const configuredMaxSteps = Number.parseInt(state.taskSettings?.maxSteps, 10);
+  const maxSteps = Number.isFinite(configuredMaxSteps) && configuredMaxSteps > 0
+    ? configuredMaxSteps
+    : defaultSettings.maxSteps;
   const hasProgress = state.isRunning || state.isPaused || step > 0;
   currentStepEl.textContent = `Step ${step}`;
   progressSection.classList.toggle("is-active", hasProgress);
   progressStatus.textContent = sanitizeRunStatus(state.status || (hasProgress ? "Processing" : "Waiting for a task"));
-  progressFill.style.width = hasProgress ? `${Math.min((step / 20) * 100, 100)}%` : "0%";
+  progressFill.style.width = hasProgress ? `${Math.min((step / maxSteps) * 100, 100)}%` : "0%";
 
   runDot.className = "status-dot";
   if (state.isPaused) runDot.classList.add("status-paused");

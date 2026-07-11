@@ -2458,34 +2458,4 @@ function escapeHtml(text) {
 }
 
 
-window.addEventListener('__agent_benchmark_request', async (event) => {
-  const { id, type, data } = event.detail || {};
-
-  if (!type) return;
-
-  console.log('[Agent Bridge] Received request:', type, data);
-
-  try {
-
-    const response = await chrome.runtime.sendMessage({
-      type: type,
-      ...data
-    });
-
-
-    window.dispatchEvent(new CustomEvent('__agent_benchmark_response', {
-      detail: { id, response }
-    }));
-  } catch (error) {
-    window.dispatchEvent(new CustomEvent('__agent_benchmark_response', {
-      detail: { id, error: error.message }
-    }));
-  }
-});
-
-
-window.__agentBridgeReady = true;
-
-
 console.log("[Agent] Content script loaded - Three-Mode Execute module ready");
-console.log("[Agent] Benchmark bridge enabled");

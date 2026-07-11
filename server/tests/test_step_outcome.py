@@ -7,7 +7,12 @@ SERVER_DIR = os.path.dirname(os.path.dirname(__file__))
 if SERVER_DIR not in sys.path:
     sys.path.insert(0, SERVER_DIR)
 
-from main import _build_response_status, _resolve_step_outcome  # noqa: E402
+from core.types import StepRequest  # noqa: E402
+from main import (  # noqa: E402
+    _build_response_status,
+    _resolve_prompt_language,
+    _resolve_step_outcome,
+)
 
 
 class StepOutcomeTest(unittest.TestCase):
@@ -33,6 +38,10 @@ class StepOutcomeTest(unittest.TestCase):
         status = _build_response_status(parsed, False)
         self.assertEqual(status["state"], "waiting_for_user")
         self.assertTrue(status["needs_user_input"])
+
+    def test_prompt_language_uses_instruction_detection(self):
+        request = StepRequest(instruction="完成这个任务", screenshot="")
+        self.assertEqual(_resolve_prompt_language(request), "zh")
 
 
 if __name__ == "__main__":
